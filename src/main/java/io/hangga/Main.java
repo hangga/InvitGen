@@ -41,8 +41,12 @@ public class Main {
 
         String name = "Budi Cahyo Nugroho,Yuli Priyanto,Kiki,Ipul bin Fakhrul,Sutrianto,Romaidi,Hidayat Sugiharto,Sukidjan,Supriyanto (RT.14),Refli Wulanto,Paeran M,Isham bin Fakhrul,Heri Supriyanto,Rahmat Budi S,Marno,Sudibyo Purnomo,Juni,Afit,Suwardjono M,Kuswardi,Amrul";
 
-        new Invigen().generate(name, template, outputPath,
-                outputPath1 -> System.out.println("Download disini : " + outputPath1)
+        new Invigen().generate(name, template, outputPath, new InvigenListener() {
+            @Override
+            public void onSuccess(String outputPath) {
+                    System.out.println("Download disini : " + outputPath);
+                }
+            }
         );
     }
 
