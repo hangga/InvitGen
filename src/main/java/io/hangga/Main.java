@@ -8,7 +8,8 @@ public class Main {
         String template = userDir + "/template.docx";
         String outputPath = userDir + "/output.docx";
 
-        String[] names = {
+
+        /*String[] names = {
                 "Budi Cahyo Nugroho",
                 "Yuli Priyanto",
                 "Kiki",
@@ -31,17 +32,18 @@ public class Main {
                 "Kuswardi",
                 "Amrul"};
 
-        new CopyContent().doing(template, outputPath, names.length, new OnCopyFinish() {
+        new Invigen().generate(names, template, outputPath, new InvigenListener() {
             @Override
-            public void OnSuccess(String output) {
-                new DocProcessor().doing(names, output, outputPath);
+            public void onSuccess(String outputPath) {
+                System.out.println("Download disini : " + outputPath);
             }
+        });*/
 
-            @Override
-            public void OnError(String errMsg) {
+        String name = "Budi Cahyo Nugroho,Yuli Priyanto,Kiki,Ipul bin Fakhrul,Sutrianto,Romaidi,Hidayat Sugiharto,Sukidjan,Supriyanto (RT.14),Refli Wulanto,Paeran M,Isham bin Fakhrul,Heri Supriyanto,Rahmat Budi S,Marno,Sudibyo Purnomo,Juni,Afit,Suwardjono M,Kuswardi,Amrul";
 
-            }
-        });
+        new Invigen().generate(name, template, outputPath,
+                outputPath1 -> System.out.println("Download disini : " + outputPath1)
+        );
     }
 
 

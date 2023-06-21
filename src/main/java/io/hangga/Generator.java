@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class CopyContent {
+public class Generator {
     void doing(String templatePath, String outputPath, int count, OnCopyFinish onCopyFinish) {
         boolean isSukses = false;
         FileInputStream fis = null;

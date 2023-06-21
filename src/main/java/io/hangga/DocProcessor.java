@@ -1,7 +1,6 @@
 package io.hangga;
 
 import org.apache.poi.xwpf.usermodel.*;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
