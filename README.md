@@ -3,6 +3,7 @@ Tools untuk mengenerate surat undangan secara semi otomatis
 
 ### Flow
 #### 1. Buat Template, perhatikan formatnya.
+
 <img src="https://raw.githubusercontent.com/hangga/invigen/main/template.png" width="100%"/>
 
 #### 2. Init nama - nama orang yang diundang, bisa String atau Array.  
@@ -31,3 +32,6 @@ new Invigen().generate(names, template, outputPath,
     outputPath1 -> System.out.println("Download disini : " + outputPath1)
 );
 ```
+Outputnya
+
+<img src="https://github.com/hangga/invigen/blob/main/output.png?raw=true" width="100%">
