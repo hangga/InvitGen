@@ -4,8 +4,9 @@ package io.hangga;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        String template = System.getProperty("user.dir")+"/Undangan 2.docx";
-        String outputPath = System.getProperty("user.dir")+"/output.docx";
+        String userDir = System.getProperty("user.dir");
+        String template = userDir + "/template.docx";
+        String outputPath = userDir + "/output.docx";
 
         String[] names = {
                 "Budi Cahyo Nugroho",
@@ -30,7 +31,18 @@ public class Main {
                 "Kuswardi",
                 "Amrul"};
 
-        new DocProcessor().doing(names, template, outputPath);
+        new CopyContent().doing(template, outputPath, names.length, new OnCopyFinish() {
+            @Override
+            public void OnSuccess(String output) {
+                new DocProcessor().doing(names, output, outputPath);
+            }
+
+            @Override
+            public void OnError(String errMsg) {
+
+            }
+        });
     }
+
 
 }

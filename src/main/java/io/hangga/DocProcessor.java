@@ -1,12 +1,14 @@
 package io.hangga;
 
 import org.apache.poi.xwpf.usermodel.*;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class DocProcessor {
     final String PATTERN_NAME = "--nama";
+
     void doing(String[] names, String templatePath, String outputPath) {
         try {
             System.out.println("Yak, doing()");
@@ -33,6 +35,7 @@ public class DocProcessor {
                 }
             }
 
+            //int tblIdx = 0;
             // jika tak ketemu, mungkin perlu dicari di tabel
             for (XWPFTable tbl : document.getTables()) {
                 for (XWPFTableRow row : tbl.getRows()) {
