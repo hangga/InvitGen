@@ -4,16 +4,33 @@ package io.hangga;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        String template = System.getProperty("user.dir")+"/Undangan 2.docx";
+        String outputPath = System.getProperty("user.dir")+"/output.docx";
 
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        String[] names = {
+                "Budi Cahyo Nugroho",
+                "Yuli Priyanto",
+                "Kiki",
+                "Ipul bin Fakhrul",
+                "Sutrianto",
+                "Romaidi",
+                "Hidayat Sugiharto",
+                "Sukidjan",
+                "Supriyanto (RT.14)",
+                "Refli Wulanto",
+                "Paeran M",
+                "Isham bin Fakhrul",
+                "Heri Supriyanto",
+                "Rahmat Budi S",
+                "Marno",
+                "Sudibyo Purnomo",
+                "Juni",
+                "Afit",
+                "Suwardjono M",
+                "Kuswardi",
+                "Amrul"};
 
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
-        }
+        new DocProcessor().doing(names, template, outputPath);
     }
+
 }
