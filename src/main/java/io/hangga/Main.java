@@ -3,10 +3,13 @@ package io.hangga;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
+
+    public static String userDir = System.getProperty("user.dir");
+    public static String template = userDir + "/template.docx";
+    public static String outputPath = userDir + "/output.docx";
     public static void main(String[] args) {
-        String userDir = System.getProperty("user.dir");
-        String template = userDir + "/template.docx";
-        String outputPath = userDir + "/output.docx";
+
+
 
 
         /*String[] names = {

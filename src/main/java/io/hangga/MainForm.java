@@ -1,117 +1,109 @@
 package io.hangga;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.File;
 
-public class MainForm extends JFrame implements ActionListener {
+public class MainForm extends JFrame {
 
     static JLabel l;
+    static JFileChooser outputChooser = new JFileChooser(FileSystemView.getFileSystemView().getDefaultDirectory());
+    private static String template = Main.template;
 
-    MainForm(){}
 
-    public static void main(String args[]){
-    //void init(){
+    MainForm() {
+    }
+
+    public static void main(String[] args) {
+        //void init(){
         // frame to contains GUI elements
         JFrame frame = new JFrame("InviGen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
+        frame.setSize(600, 400);
 
         Container pane = frame.getContentPane();
-        JLabel label = new JLabel("Tulis Nama-nama Peserta (pisahkan dengan koma , )");
-        pane.add(label, BorderLayout.PAGE_START);
+        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+
+        JPanel topPanel = new JPanel();
+        JButton btnChooseTemplate = new JButton("Pilih Template");
+        JLabel lblTemplate = new JLabel("Template : " + Main.template);
+        topPanel.add(btnChooseTemplate, BorderLayout.LINE_START);
+        topPanel.add(lblTemplate, BorderLayout.CENTER);
+        pane.add(topPanel);
+
+        JLabel lblTulisNama = new JLabel("Tulis Nama-nama Peserta (pisahkan dengan koma , )");
+        JPanel topSubPanel = new JPanel();
+        topSubPanel.add(lblTulisNama, BorderLayout.LINE_START);
+        topSubPanel.add(new JPanel(), BorderLayout.LINE_END);
+        topSubPanel.setSize(500, 100);
+        pane.add(topSubPanel);
         JTextArea ta = new JTextArea();
         pane.add(ta, BorderLayout.CENTER);
 
-        JPanel panel = new JPanel(); // the panel is not visible in output
 
-        //JTextField tf = new JTextField(10); // accepts upto 10 characters
-        //JTextArea tf = new JTextArea(); // accepts upto 10 characters
         JButton btnGenerate = new JButton("Generate");
-        JButton btnReset = new JButton("Reset");
-        panel.add(btnGenerate);
-        panel.add(btnReset);
-        pane.add(panel, BorderLayout.PAGE_END);
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.add(btnGenerate, BorderLayout.LINE_END);
+        pane.add(bottomPanel);
+
+        btnChooseTemplate.addActionListener(actionEvent -> {
+            JFileChooser fileTemplateChooser = new JFileChooser(FileSystemView.getFileSystemView().getDefaultDirectory());
 
 
-       /* JMenuBar ob = new JMenuBar();
-        JMenu ob1 = new JMenu("FILE");
-        JMenu ob2 = new JMenu("Help");
-        ob.add(ob1);
-        ob.add(ob2);
-        JMenuItem m11 = new JMenuItem("Open");
-        JMenuItem m22 = new JMenuItem("Save as");
-        ob1.add(m11);
-        ob1.add(m22);*/
+            fileTemplateChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .docx", "docx"));
+            fileTemplateChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .doc", "doc"));
+            fileTemplateChooser.addChoosableFileFilter(new FileNameExtensionFilter("LibreOffice Documents .odt", "odt"));
 
-
-
-
-        //panel.add(label); // Components Added using Flow Layout
-        //panel.add(tf);
-        //panel.add(label); // Components Added using Flow Layout
-
-        btnGenerate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JFileChooser fileChooser = new JFileChooser();
-                //fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-                int r = fileChooser.showSaveDialog(null);
-
-                if (r == JFileChooser.APPROVE_OPTION) {
-
-                } else {
-
-                }
+            if (fileTemplateChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+                template = fileTemplateChooser.getSelectedFile().getAbsolutePath();
+                lblTemplate.setText("Template : " + template);
             }
         });
 
-        //panel.add(btnSend);
-        //panel.add(btnReset);
-        //JTextArea ta = new JTextArea();
 
-        //frame.getContentPane().add(BorderLayout.SOUTH, panel);
-        //frame.getContentPane().add(BorderLayout.NORTH, ta);
-        //frame.getContentPane().add(BorderLayout.CENTER, ta);
+        btnGenerate.addActionListener(actionEvent -> {
+
+            if (ta.getText().trim().length() == 0){
+                showInfo(frame, "Ketik nama-nama dan pisahkan dengan [,]");
+                return;
+            }
+
+            outputChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .docx", "docx"));
+            outputChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .doc", "doc"));
+            outputChooser.addChoosableFileFilter(new FileNameExtensionFilter("LibreOffice Documents .odt", "odt"));
+
+
+            if (outputChooser.getSelectedFile() != null) {
+                new Invigen().generate(ta.getText(), template, outputChooser.getSelectedFile().getAbsolutePath(), new InvigenListener() {
+                    @Override
+                    public void onSuccess(String outputPath) {
+                        showInfo(frame, "Buka disini : " + outputPath);
+                    }
+                });
+            } else {
+                outputChooser.setSelectedFile(new File("output-invigen.docx"));
+
+                if (outputChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+                    new Invigen().generate(ta.getText(), template, outputChooser.getSelectedFile().getAbsolutePath(), new InvigenListener() {
+                        @Override
+                        public void onSuccess(String outputPath) {
+                            showInfo(frame, "Buka disini : " + outputPath);
+                        }
+                    });
+                }
+            }
+
+        });
         frame.setVisible(true);
-        //if (!f.isShowing()) f.show();
     }
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        String com = actionEvent.getActionCommand();
 
-        if (com.equals("save")) {
-            // create an object of JFileChooser class
-            JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
-            // invoke the showsSaveDialog function to show the save dialog
-            int r = j.showSaveDialog(null);
-
-            // if the user selects a file
-            if (r == JFileChooser.APPROVE_OPTION) {
-                // set the label to the path of the selected file
-                l.setText(j.getSelectedFile().getAbsolutePath());
-            } else
-                l.setText("the user cancelled the operation");// if the user cancelled the operation
-        }
-
-        // if the user presses the open dialog show the open dialog
-        else {
-            // create an object of JFileChooser class
-            JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
-            // invoke the showsOpenDialog function to show the save dialog
-            int r = j.showOpenDialog(null);
-
-            // if the user selects a file
-            if (r == JFileChooser.APPROVE_OPTION){
-                // set the label to the path of the selected file
-                l.setText(j.getSelectedFile().getAbsolutePath());
-            }   else
-                l.setText("the user cancelled the operation"); // if the user cancelled the operation
-        }
+    static void showInfo(JFrame frame, String msg){
+        JOptionPane.showMessageDialog(frame,
+                msg,
+                "Berhasil",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 }
