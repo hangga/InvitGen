@@ -6,14 +6,14 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.File;
 
-public class MainForm extends JFrame {
+public class MainFrame extends JFrame {
 
     static JLabel l;
     static JFileChooser outputChooser = new JFileChooser(FileSystemView.getFileSystemView().getDefaultDirectory());
-    private static String template = Main.template;
+    private static String template = Invigen.template;
 
 
-    MainForm() {
+    MainFrame() {
     }
 
     public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class MainForm extends JFrame {
 
         JPanel topPanel = new JPanel();
         JButton btnChooseTemplate = new JButton("Pilih Template");
-        JLabel lblTemplate = new JLabel("Template : " + Main.template);
+        JLabel lblTemplate = new JLabel("Template : " + Invigen.template);
         topPanel.add(btnChooseTemplate, BorderLayout.LINE_START);
         topPanel.add(lblTemplate, BorderLayout.CENTER);
         pane.add(topPanel);
