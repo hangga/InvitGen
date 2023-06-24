@@ -1,5 +1,5 @@
 # InviGen
-InviGen adalah tools untuk men*generate* surat undangan dengan jumlah banyak secara semi otomatis.
+InviGen adalah tools untuk mengenerate surat undangan dengan jumlah banyak (sesuai daftar nama) secara semi otomatis.
 
 ### Cerita dikit
 Jadi di tahun 1444H ini saya kembali diamanahi sebagai Sekertaris di Panitia Qurban Masjid Muhtadien.   
