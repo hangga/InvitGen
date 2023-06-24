@@ -1,20 +1,19 @@
 # InviGen
-InviGen adalah tools untuk mengenerate surat undangan dengan jumlah banyak secara semi otomatis
+InviGen adalah tools untuk men*generate* surat undangan dengan jumlah banyak secara semi otomatis.
 
 ### Cerita dikit
 Jadi di tahun 1444H ini saya kembali diamanahi sebagai Sekertaris di Panitia Qurban Masjid Muhtadien.   
-Nah, saat mau bikin undangan untuk 118 personil, sy kepikiran bgmn caranya agar tidak capek nulis tangan nama-nama kepada Yth-nya.   
+Nah, saat mau bikin undangan untuk 100-an personil, saya kepikiran bagaimana caranya agar tidak perlu capek nulis tangan nama-namanya. Saya juga tidak mau capek copy-paste 100 kali Hahaha.   
 
 Akhirnya ba'da Maghrib bikin tools ini sembari menunggu waktu 'Isya.  
 
 ### Cara Menggunakan InviGen
 #### 1. Membuat Template Undangan
-Buatlah template dokumen undangan pake aplikasi Office(bisa MS Word atau Libreoffice silahkan) dengan format .docx.  
-Kemudian bagian isian nama, silahkan ketik --nama
+Buatlah template dokumen undangan pake aplikasi Office(bisa MS Word atau Libreoffice silahkan) dengan format .docx.
 
 **Catatan**  
-- Tool ini hanya bisa mendeteksi tabel.
-- Sehingga semua paragraf pada template **harus masuk dalam tabel**, meskipun hanya 1 column dan 1 row.
+1. Karena InviGen hanya bisa mendeteksi tabel sehingga semua paragraf pada template **harus masuk dalam tabel**, meskipun hanya 1 column dan 1 row.
+2. Pada kolom isian nama, ketiklah **--nama** (persis seperti ini yak).
 - Contoh :<br/><br/>
 <img src="https://raw.githubusercontent.com/hangga/invigen/main/template.png" width="80%"/>
 
@@ -31,6 +30,9 @@ Klik tombol **Generate**. Jika proses berhasil, maka akan muncul dialog untuk me
 <br/><br/>
 <img width="70%" src="https://github.com/hangga/invigen/blob/main/save-output.png?raw=true"/>
 <br/>
+
+#### 5. Selesai
+Buka file **output-invigen.docx** lalu rapihkan sendiri jika kurang rapih.<br/><br/>
 Contoh Outputnya
 
 <img src="https://github.com/hangga/invigen/blob/main/output.png?raw=true" width="80%">
