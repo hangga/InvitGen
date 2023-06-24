@@ -3,9 +3,9 @@ InviGen adalah tools untuk men*generate* surat undangan dengan jumlah banyak sec
 
 ### Cerita dikit
 Jadi di tahun 1444H ini saya kembali diamanahi sebagai Sekertaris di Panitia Qurban Masjid Muhtadien.   
-Nah, saat mau bikin undangan untuk 100-an personil, saya kepikiran bagaimana caranya agar tidak perlu capek nulis tangan nama-namanya. Saya juga tidak mau capek copy-paste 100 kali Hahaha.   
+Nah, saat mau bikin undangan untuk 100-an personil, saya kepikiran bagaimana caranya agar tidak perlu capek nulis tangan nama-namanya. Saya juga tidak mau capek copy-paste layout paragraf 100 kali Hahaha.   
 
-Akhirnya ba'da Maghrib bikin tools ini sembari menunggu waktu 'Isya.  
+Akhirnya ba'da Maghrib buka IDE meluncur coding bikin tools ini sembari menunggu waktu 'Isya.<br/><br/>Alhamdulillah begitu selesai langsung release(menyusul sedikit optimasi & improvement di hari berikutnya) sehingga pekerjaan sekertaris tahun-tahun berikutnya sedikit lebih ringan.
 
 ### Cara Menggunakan InviGen
 #### 1. Membuat Template Undangan
@@ -36,3 +36,5 @@ Buka file **output-invigen.docx** lalu rapihkan sendiri jika kurang rapih.<br/><
 Contoh Outputnya
 
 <img src="https://github.com/hangga/invigen/blob/main/output.png?raw=true" width="80%">
+
+Tools ini beserta source codo boleh didownload secara bebas (lihat link **Release** di sidebar kanan dibawah **About**).
