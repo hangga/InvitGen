@@ -1,37 +1,28 @@
 # Invigen
 Tools untuk mengenerate surat undangan secara semi otomatis
 
-### Flow
-#### 1. Buat Template, perhatikan formatnya.
+### Story
+Jadi di tahun 1444H ini saya kembali diamanahi sebagai Sekertaris di Panitia Qurban Masjid Muhtadien.   
+Nah, saat mau bikin undangan untuk 118 personil, sy kepikiran bgmn caranya agar tidak capek nulis tangan nama-nama kepada Yth-nya.   
 
+Akhirnya ba'da Maghrib bikin tools ini sembari menunggu waktu 'Isya.  
+
+### Flow
+#### 1. Buat Template
+Buat template dokumen pake aplikasi Office(bisa MS Word atau Libreoffice silahkan) dengan format .docx.  
+
+**Catatan**  
+- Tool ini hanya bisa mendeteksi tabel.
+- Sehingga semua paragraf pada template **harus masuk dalam tabel**, meskipun hanya 1 column dan 1 row.
+- Contoh :<br/><br/>
 <img src="https://raw.githubusercontent.com/hangga/invigen/main/template.png" width="100%"/>
 
-#### 2. Init nama - nama orang yang diundang, bisa String atau Array.  
-
-```kotlin
-String names = "Budi Cahyo Nugroho,Yuli Priyanto,Kiki,Ipul bin Fakhrul,Sutrianto,Romaidi,Hidayat Sugiharto,Sukidjan,Supriyanto (RT.14),Refli Wulanto,Paeran M,Isham bin Fakhrul,Heri Supriyanto,Rahmat Budi S,Marno,Sudibyo Purnomo,Juni,Afit,Suwardjono M,Kuswardi,Amrul";
-```
-#### 3. Lalu tinggal panggil method `new Invigen().generate()`. 
-Lihat contoh.
-
-```kotlin
-new Invigen().generate(name, template, outputPath, new InvigenListener() {
-    @Override
-    public void onSuccess(String outputPath) {
-        System.out.println("Download disini : " + outputPath);
-        }
-    }
-);
-```
-
-Pake gaya lambda expressions, biar keren
-
-
-```Kotlin
-new Invigen().generate(names, template, outputPath,
-    outputPath1 -> System.out.println("Download disini : " + outputPath1)
-);
-```
-Outputnya
+#### 2. Pilih Template
+Pilih template yang telah anda buat tadi dengan cara klik tombol **Pilih Template**.
+#### 3. Ketik nama-nama pada Text Area
+Ketik nama-nama yang akan anda undang.
+#### 4. Generate
+Klik tombol **Generate**. Jika proses berhasil, maka akan muncul dialog untuk menyimpan file hasil generate bernama **output-invigen.docx**.<br/><br/>
+Contoh Outputnya
 
 <img src="https://github.com/hangga/invigen/blob/main/output.png?raw=true" width="100%">
