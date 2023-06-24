@@ -1,15 +1,16 @@
-# Invigen
-Tools untuk mengenerate surat undangan secara semi otomatis
+# InviGen
+InviGen adalah tools untuk mengenerate surat undangan dengan jumlah banyak secara semi otomatis
 
-### Story
+### Cerita dikit
 Jadi di tahun 1444H ini saya kembali diamanahi sebagai Sekertaris di Panitia Qurban Masjid Muhtadien.   
 Nah, saat mau bikin undangan untuk 118 personil, sy kepikiran bgmn caranya agar tidak capek nulis tangan nama-nama kepada Yth-nya.   
 
 Akhirnya ba'da Maghrib bikin tools ini sembari menunggu waktu 'Isya.  
 
-### Flow
-#### 1. Buat Template
-Buat template dokumen pake aplikasi Office(bisa MS Word atau Libreoffice silahkan) dengan format .docx.  
+### Cara Menggunakan InviGen
+#### 1. Membuat Template Undangan
+Buatlah template dokumen undangan pake aplikasi Office(bisa MS Word atau Libreoffice silahkan) dengan format .docx.  
+Kemudian bagian isian nama, silahkan ketik --nama
 
 **Catatan**  
 - Tool ini hanya bisa mendeteksi tabel.
