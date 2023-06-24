@@ -2,6 +2,11 @@ package io.hangga;
 
 public class Invigen {
 
+    public static String userDir = System.getProperty("user.dir");
+    public static String template = userDir + "/template.docx";
+
+    public static String outputPath = userDir + "/output.docx";
+
     void generate(String names, String template, String outputPath, InvigenListener listener){
 
         String[] arrNames = names.split(",");
