@@ -22,6 +22,7 @@ Pilih template yang telah anda buat tadi dengan cara klik tombol **Pilih Templat
 
 #### 3. Ketik nama-nama pada Text Area
 Ketik nama-nama yang akan anda undang.
+<br/>
 <img width="400" src="https://github.com/hangga/invigen/blob/main/pilih-template.png?raw=true"/>
 
 #### 4. Generate
