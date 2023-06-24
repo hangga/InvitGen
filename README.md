@@ -7,15 +7,17 @@ Nah, saat mau bikin undangan untuk 100-an personil, saya kepikiran bagaimana car
 
 Akhirnya ba'da Maghrib buka IDE meluncur coding bikin tools ini sembari menunggu waktu 'Isya.<br/><br/>Alhamdulillah begitu selesai langsung release(menyusul sedikit optimasi & improvement di hari berikutnya) sehingga pekerjaan sekertaris tahun-tahun berikutnya sedikit lebih ringan.
 
+### System Requirement
+- Min Jdk 1.8 atau Java 8 Keatas.
 ### Cara Menggunakan InviGen
 #### 1. Membuat Template Undangan
 Buatlah template dokumen undangan pake aplikasi Office(bisa MS Word atau Libreoffice silahkan) dengan format .docx.
 
 **Catatan**  
 1. Karena InviGen hanya bisa mendeteksi tabel sehingga semua paragraf pada template **harus masuk dalam tabel**, meskipun hanya 1 column dan 1 row.
-2. Pada kolom isian nama, ketiklah **--nama** (persis seperti ini yak).
+2. Pada isian nama, ketiklah **--nama**  👈🏽(harus persis seperti ini, penting & perhatikan).
 - Contoh :<br/><br/>
-<img src="https://raw.githubusercontent.com/hangga/invigen/main/template.png" width="80%"/>
+<img src="https://raw.githubusercontent.com/hangga/invigen/main/template.png" width="100%"/>
 
 #### 2. Pilih Template
 Pilih template yang telah anda buat tadi dengan cara klik tombol **Pilih Template**.
@@ -37,4 +39,4 @@ Contoh Outputnya
 
 <img src="https://github.com/hangga/invigen/blob/main/output.png?raw=true" width="80%">
 
-Tools ini beserta source codo boleh didownload secara bebas (lihat link **Release** di sidebar kanan dibawah **About**).
+Tools ini beserta source code boleh didownload secara bebas (lihat link **Release** di sidebar kanan dibawah **About**).
