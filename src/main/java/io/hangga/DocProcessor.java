@@ -23,37 +23,64 @@ public class DocProcessor {
                     String text = run.getText(0);
 
                     if (text != null && text.contains(PATTERN_NAME)) {
-                        System.out.println("Yak, ketemu --nama");
+                        //System.out.println("Yak, ketemu --nama");
                         // Mengganti teks lama dengan teks baru
                         text = text.replace(PATTERN_NAME, names[i]);
                         i++;
                         run.setText(text, 0);
-                        System.out.println("Berhasil jadi " + names[i]);
+                        //System.out.println("Berhasil jadi " + names[i]);
                         System.out.println();
                     }
                 }
             }
 
-            //int tblIdx = 0;
-            // jika tak ketemu, mungkin perlu dicari di tabel
-            for (XWPFTable tbl : document.getTables()) {
-                for (XWPFTableRow row : tbl.getRows()) {
+            for (int x = 0; x < names.length; x++){
+                for (XWPFTableRow row : document.getTables().get(x).getRows()) {
                     for (XWPFTableCell cell : row.getTableCells()) {
                         for (XWPFParagraph p : cell.getParagraphs()) {
                             for (XWPFRun r : p.getRuns()) {
                                 String text = r.getText(0);
                                 if (text != null && text.contains(PATTERN_NAME)) {
+                                    try{
+                                        text = text.replace(PATTERN_NAME, names[x]);
+                                        System.out.println(i+" Berhasil jadi " + names[x]);
+                                        //i++;
+                                        r.setText(text, 0);
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
 
-                                    text = text.replace(PATTERN_NAME, names[i]);
-                                    System.out.println("Berhasil jadi " + names[i]);
-                                    i++;
-                                    r.setText(text, 0);
                                 }
                             }
                         }
                     }
                 }
             }
+
+            //int tblIdx = 0;
+            // jika tak ketemu, mungkin perlu dicari di tabel
+            /*for (XWPFTable tbl : document.getTables()) {
+                for (XWPFTableRow row : tbl.getRows()) {
+                    for (XWPFTableCell cell : row.getTableCells()) {
+                        for (XWPFParagraph p : cell.getParagraphs()) {
+                            for (XWPFRun r : p.getRuns()) {
+                                String text = r.getText(0);
+                                if (text != null && text.contains(PATTERN_NAME)) {
+                                    try{
+                                        text = text.replace(PATTERN_NAME, names[i]);
+                                        System.out.println(i+" Berhasil jadi " + names[i]);
+                                        i++;
+                                        r.setText(text, 0);
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }*/
 
             // Menyimpan dokumen yang telah diubah
             FileOutputStream fos = new FileOutputStream(outputPath);
