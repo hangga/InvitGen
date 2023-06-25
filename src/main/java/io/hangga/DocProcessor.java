@@ -8,9 +8,9 @@ import java.io.FileOutputStream;
 public class DocProcessor {
     final String PATTERN_NAME = "--nama";
 
-    void doing(String[] names, String templatePath, String outputPath) {
+    void replaceName(String[] names, String templatePath, String outputPath) {
         try {
-            System.out.println("Yak, doing()");
+            System.out.println("Yak, replaceName()");
 
             FileInputStream fis = new FileInputStream(templatePath);
             XWPFDocument document = new XWPFDocument(fis);

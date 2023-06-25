@@ -5,7 +5,7 @@ public class Invigen {
     public static String userDir = System.getProperty("user.dir");
     public static String template = userDir + "/template.docx";
 
-    public static String outputPath = userDir + "/output.docx";
+    public static String tmp = userDir + "/output.docx";
 
     void generate(String names, String template, String outputPath, InvigenListener listener){
 
@@ -13,7 +13,7 @@ public class Invigen {
         new Generator().doing(template, outputPath, arrNames.length, new OnCopyFinish() {
             @Override
             public void OnSuccess(String output) {
-                new DocProcessor().doing(arrNames, output, outputPath);
+                new DocProcessor().replaceName(arrNames, output, outputPath);
                 listener.onSuccess(outputPath);
             }
 
@@ -27,7 +27,7 @@ public class Invigen {
         new Generator().doing(template, outputPath, names.length, new OnCopyFinish() {
             @Override
             public void OnSuccess(String output) {
-                new DocProcessor().doing(names, output, outputPath);
+                new DocProcessor().replaceName(names, output, outputPath);
                 listener.onSuccess(outputPath);
             }
 
