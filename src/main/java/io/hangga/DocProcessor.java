@@ -10,6 +10,7 @@ public class DocProcessor {
     final String PATTERN_NAME = "--nama";
 
     void doing(String[] names, String templatePath, String outputPath) {
+        System.out.println("Yak, prepare doing()");
         try {
             System.out.println("Yak, doing()");
 
@@ -18,7 +19,7 @@ public class DocProcessor {
 
             int i = 0;
             // Mendapatkan semua paragraf dalam dokumen
-            for (XWPFParagraph p : document.getParagraphs()) {
+            /*for (XWPFParagraph p : document.getParagraphs()) {
                 // Mendapatkan semua run (teks) dalam paragraf
                 for (XWPFRun run : p.getRuns()) {
                     String text = run.getText(0);
@@ -33,7 +34,7 @@ public class DocProcessor {
                         System.out.println();
                     }
                 }
-            }
+            }*/
 
             //int tblIdx = 0;
             // jika tak ketemu, mungkin perlu dicari di tabel
@@ -66,6 +67,7 @@ public class DocProcessor {
 
             System.out.println("Penggantian teks berhasil!");
         } catch (Exception e) {
+            System.out.println("ADA ERROR ---> " + e.getMessage());
             e.printStackTrace();
         }
     }
