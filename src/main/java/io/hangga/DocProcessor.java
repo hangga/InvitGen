@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 public class DocProcessor {
     final String PATTERN_NAME = "--nama";
 
-    void replaceName(String[] names, String templatePath, String outputPath) {
+    void replaceName(String[] names, String templatePath, String outputPath, OnProgressDocument onProgressDocument) {
         try {
             System.out.println("Yak, replaceName()");
 
@@ -27,13 +27,14 @@ public class DocProcessor {
                         // Mengganti teks lama dengan teks baru
                         text = text.replace(PATTERN_NAME, names[i]);
                         i++;
+
                         run.setText(text, 0);
                         //System.out.println("Berhasil jadi " + names[i]);
                         System.out.println();
                     }
                 }
             }
-
+            /*System.out.println("cek names.length :" + names.length);
             for (int x = 0; x < names.length; x++){
                 for (XWPFTableRow row : document.getTables().get(x).getRows()) {
                     for (XWPFTableCell cell : row.getTableCells()) {
@@ -47,19 +48,20 @@ public class DocProcessor {
                                         //i++;
                                         r.setText(text, 0);
                                     }catch (Exception e){
+                                        System.out.println(i+"Error :"+ e.getMessage());
                                         e.printStackTrace();
                                     }
-
+                                    onProgressDocument.onProgress(x);
                                 }
                             }
                         }
                     }
                 }
-            }
+            }*/
 
             //int tblIdx = 0;
             // jika tak ketemu, mungkin perlu dicari di tabel
-            /*for (XWPFTable tbl : document.getTables()) {
+            for (XWPFTable tbl : document.getTables()) {
                 for (XWPFTableRow row : tbl.getRows()) {
                     for (XWPFTableCell cell : row.getTableCells()) {
                         for (XWPFParagraph p : cell.getParagraphs()) {
@@ -69,7 +71,9 @@ public class DocProcessor {
                                     try{
                                         text = text.replace(PATTERN_NAME, names[i]);
                                         System.out.println(i+" Berhasil jadi " + names[i]);
+                                        onProgressDocument.onProgress(i, names.length);
                                         i++;
+
                                         r.setText(text, 0);
                                     }catch (Exception e){
                                         e.printStackTrace();
@@ -80,7 +84,7 @@ public class DocProcessor {
                         }
                     }
                 }
-            }*/
+            }
 
             // Menyimpan dokumen yang telah diubah
             FileOutputStream fos = new FileOutputStream(outputPath);

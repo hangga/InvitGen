@@ -43,8 +43,15 @@ public class MainFrame extends JFrame {
         pane.add(ta, BorderLayout.CENTER);
 
 
+        JProgressBar progressBar = new JProgressBar();
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+        progressBar.setVisible(false);
+
+
         JButton btnGenerate = new JButton("Generate");
         JPanel bottomPanel = new JPanel();
+        bottomPanel.add(progressBar);
         bottomPanel.add(btnGenerate, BorderLayout.LINE_END);
         pane.add(bottomPanel);
 
@@ -63,12 +70,16 @@ public class MainFrame extends JFrame {
         });
 
 
+
         btnGenerate.addActionListener(actionEvent -> {
 
             if (ta.getText().trim().length() == 0){
                 showInfo(frame, "Ketik nama-nama dan pisahkan dengan [,]");
                 return;
             }
+            String[] arrNames = ta.getText().trim().split(",");
+            progressBar.setVisible(true);
+            progressBar.setMaximum(arrNames.length);
 
             outputChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .docx", "docx"));
             outputChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .doc", "doc"));
@@ -81,6 +92,13 @@ public class MainFrame extends JFrame {
                     public void onSuccess(String outputPath) {
                         showInfo(frame, "Buka disini : " + outputPath);
                     }
+
+                    @Override
+                    public void onProgress(int progress, int max) {
+                        progressBar.setValue(progress);
+                        System.out.println("Cek InvigenListener : proppgress -> " + progress);
+                        if (progress == max) progressBar.setVisible(false);
+                    }
                 });
             } else {
                 outputChooser.setSelectedFile(new File("output-invigen.docx"));
@@ -90,6 +108,13 @@ public class MainFrame extends JFrame {
                         @Override
                         public void onSuccess(String outputPath) {
                             showInfo(frame, "Buka disini : " + outputPath);
+                        }
+
+                        @Override
+                        public void onProgress(int progress, int max) {
+                            System.out.println("Cek InvigenListener : proppgress -> " + progress);
+                            progressBar.setValue(progress);
+                            if (progress == max) progressBar.setVisible(false);
                         }
                     });
                 }
