@@ -1,4 +1,4 @@
-package io.hangga;
+package io.hangga.tools;
 
 public interface OnCopying {
 

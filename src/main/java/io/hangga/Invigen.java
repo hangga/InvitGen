@@ -1,5 +1,7 @@
 package io.hangga;
 
+import io.hangga.tools.*;
+
 public class Invigen {
 
     public static String userDir = System.getProperty("user.dir");
@@ -7,7 +9,7 @@ public class Invigen {
 
     public static String tmp = userDir + "/output.docx";
 
-    void generate(String names, String template, String outputPath, InvigenListener listener) {
+    public void generate(String names, String template, String outputPath, InvigenListener listener) {
 
         String[] arrNames = names.split(",");
         new Generator().setPath(template, outputPath, arrNames.length, new OnCopying() {
@@ -40,7 +42,7 @@ public class Invigen {
         });
     }
 
-    void generate(String[] names, String template, String outputPath, InvigenListener listener) {
+    public void generate(String[] names, String template, String outputPath, InvigenListener listener) {
         new Generator().setPath(template, outputPath, names.length, new OnCopying() {
             @Override
             public void OnCopyProgress(int progress, String status) {

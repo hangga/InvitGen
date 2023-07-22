@@ -1,13 +1,15 @@
 package io.hangga;
 
+import io.hangga.tools.DocProcessor;
+import io.hangga.tools.Generator;
+import io.hangga.tools.OnCopying;
+import io.hangga.tools.OnWriting;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.File;
-
-import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
-import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class MainFrame extends JFrame {
 
@@ -16,7 +18,7 @@ public class MainFrame extends JFrame {
     private static String template = Invigen.template;
 
 
-    MainFrame() {
+    public MainFrame() {
     }
 
     public static void main(String[] args) {
@@ -27,7 +29,7 @@ public class MainFrame extends JFrame {
         frame.setSize(600, 400);
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
 
         Container pane = frame.getContentPane();
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
@@ -48,7 +50,7 @@ public class MainFrame extends JFrame {
         pane.add(topSubPanel);
 
 
-        JTextArea ta = new JTextArea(20,4);
+        JTextArea ta = new JTextArea(20, 4);
 
         JScrollPane scroll = new JScrollPane(ta);
         scroll.setSize(new Dimension(600, 600));
@@ -101,8 +103,6 @@ public class MainFrame extends JFrame {
                 "nagata,nagihan,nagios,NAGIOS,nagios1,NAGIOS1,nagios2,nagios3,nagios4,nagios5,nagiosadmin");
 
 
-
-
         JProgressBar progressBar = new JProgressBar();
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
@@ -132,7 +132,7 @@ public class MainFrame extends JFrame {
 
         btnGenerate.addActionListener(actionEvent -> {
 
-            if (ta.getText().trim().length() == 0){
+            if (ta.getText().trim().length() == 0) {
                 showInfo(frame);
                 return;
             }
@@ -219,7 +219,7 @@ public class MainFrame extends JFrame {
     }
 
 
-    static void showInfo(JFrame frame){
+    static void showInfo(JFrame frame) {
         JOptionPane.showMessageDialog(frame,
                 "Ketik nama-nama dan pisahkan dengan [,]",
                 "Berhasil",

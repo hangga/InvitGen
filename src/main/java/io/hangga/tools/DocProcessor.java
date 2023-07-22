@@ -1,4 +1,4 @@
-package io.hangga;
+package io.hangga.tools;
 
 import org.apache.poi.xwpf.usermodel.*;
 
@@ -13,7 +13,7 @@ public class DocProcessor extends SwingWorker<Void, Void> {
     private String outputPath;
     private OnWriting onWriting;
 
-    DocProcessor replaceName(String[] names, String templatePath, String outputPath, OnWriting onWriting) {
+    public DocProcessor replaceName(String[] names, String templatePath, String outputPath, OnWriting onWriting) {
         this.names = names;
         this.templatePath = templatePath;
         this.outputPath = outputPath;

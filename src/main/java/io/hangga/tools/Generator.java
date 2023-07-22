@@ -1,4 +1,4 @@
-package io.hangga;
+package io.hangga.tools;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -19,7 +19,7 @@ public class Generator extends SwingWorker<Void, Void> {
     private String outputPath;
     private int count;
     OnCopying onCopying;
-    Generator setPath(String templatePath, String outputPath, int count, OnCopying onCopying) {
+    public Generator setPath(String templatePath, String outputPath, int count, OnCopying onCopying) {
         this.templatePath = templatePath;
         this.outputPath = outputPath;
         this.count = count;
