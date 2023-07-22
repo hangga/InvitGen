@@ -11,18 +11,19 @@ public class DocProcessor extends SwingWorker<Void, Void> {
     private String[] names;
     private String templatePath;
     private String outputPath;
-    private OnProgressDocument onProgressDocument;
+    private OnWriting onWriting;
 
-    DocProcessor replaceName(String[] names, String templatePath, String outputPath, OnProgressDocument onProgressDocument) {
+    DocProcessor replaceName(String[] names, String templatePath, String outputPath, OnWriting onWriting) {
         this.names = names;
         this.templatePath = templatePath;
         this.outputPath = outputPath;
-        this.onProgressDocument = onProgressDocument;
+        this.onWriting = onWriting;
         return this;
     }
 
     @Override
     protected Void doInBackground() {
+        boolean isSucceded = true;
         try {
             System.out.println("Yak, replaceName()");
 
@@ -85,7 +86,7 @@ public class DocProcessor extends SwingWorker<Void, Void> {
                                     try{
                                         text = text.replace(PATTERN_NAME, names[i]);
                                         System.out.println(i+" Berhasil jadi " + names[i]);
-                                        onProgressDocument.onProgress(i, names.length);
+                                        onWriting.onProgress(i, names[i] +" ..."+i);
                                         i++;
 
                                         r.setText(text, 0);
@@ -107,11 +108,12 @@ public class DocProcessor extends SwingWorker<Void, Void> {
             fis.close();
             fos.close();
             document.close();
-
             System.out.println("Penggantian teks berhasil!");
         } catch (Exception e) {
             e.printStackTrace();
+            isSucceded = false;
         }
+        if (isSucceded) onWriting.onFinished();
         return null;
     }
 }
