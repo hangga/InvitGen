@@ -6,6 +6,9 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.File;
 
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
+
 public class MainFrame extends JFrame {
 
     //static JLabel l;
@@ -32,8 +35,9 @@ public class MainFrame extends JFrame {
         JPanel topPanel = new JPanel();
         JButton btnChooseTemplate = new JButton("Pilih Template");
         JLabel lblTemplate = new JLabel("Template : " + Invigen.template);
-        topPanel.add(btnChooseTemplate, BorderLayout.LINE_START);
-        topPanel.add(lblTemplate, BorderLayout.CENTER);
+        topPanel.add(lblTemplate, BorderLayout.LINE_START);
+        topPanel.add(btnChooseTemplate, BorderLayout.CENTER);
+
         pane.add(topPanel);
 
         JLabel lblTulisNama = new JLabel("Tulis Nama-nama Peserta (pisahkan dengan koma , )");
@@ -42,7 +46,14 @@ public class MainFrame extends JFrame {
         topSubPanel.add(new JPanel(), BorderLayout.LINE_END);
         topSubPanel.setSize(500, 100);
         pane.add(topSubPanel);
-        JTextArea ta = new JTextArea();
+
+
+        JTextArea ta = new JTextArea(20,4);
+
+        JScrollPane scroll = new JScrollPane(ta);
+        scroll.setSize(new Dimension(600, 600));
+
+        pane.add(scroll, BorderLayout.LINE_START);
         // just sample
         ta.setText("Bambang, Budiman, Paiman, Pardiman, Ngattijan, Suherman, Wakijan, WAgiman, Wagiran, TTugiran, " +
                 "Sangiran, PPoniran, Ponimin, Ngatimin, Ngadimin, Wagimin, Ponirin, Ngahidin, Sugimin, Wagimin, " +
@@ -88,7 +99,8 @@ public class MainFrame extends JFrame {
                 "iftitahu,ifurkan,ifxjava,igadam,iganatiom,igibson,igkim,ignac,ignace,ignacio,ignas,ignat,ignatiom,ignatova,ignatyukvi,ignatz," +
                 "ignore,igor,igorpot,igosyogi,igrek,iguana,igutierrez,ihc,iheroglu,ihira,ihqmoddnom,ihsan,ihunter," +
                 "nagata,nagihan,nagios,NAGIOS,nagios1,NAGIOS1,nagios2,nagios3,nagios4,nagios5,nagiosadmin");
-        pane.add(ta, BorderLayout.CENTER);
+
+
 
 
         JProgressBar progressBar = new JProgressBar();
@@ -99,13 +111,14 @@ public class MainFrame extends JFrame {
 
         JButton btnGenerate = new JButton("Generate");
         JPanel bottomPanel = new JPanel();
+        bottomPanel.setSize(new Dimension(600, 50));
+        //bottomPanel.setBackground(Color.BLUE);
         bottomPanel.add(progressBar);
         bottomPanel.add(btnGenerate, BorderLayout.LINE_END);
         pane.add(bottomPanel);
 
         btnChooseTemplate.addActionListener(actionEvent -> {
             JFileChooser fileTemplateChooser = new JFileChooser(FileSystemView.getFileSystemView().getDefaultDirectory());
-
 
             fileTemplateChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .docx", "docx"));
             fileTemplateChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .doc", "doc"));
