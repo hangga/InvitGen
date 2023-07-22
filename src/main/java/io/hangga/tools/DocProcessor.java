@@ -1,14 +1,29 @@
-package io.hangga;
+package io.hangga.tools;
 
 import org.apache.poi.xwpf.usermodel.*;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class DocProcessor {
+public class DocProcessor extends SwingWorker<Void, Void> {
     final String PATTERN_NAME = "--nama";
+    private String[] names;
+    private String templatePath;
+    private String outputPath;
+    private OnWriting onWriting;
 
-    void replaceName(String[] names, String templatePath, String outputPath) {
+    public DocProcessor replaceName(String[] names, String templatePath, String outputPath, OnWriting onWriting) {
+        this.names = names;
+        this.templatePath = templatePath;
+        this.outputPath = outputPath;
+        this.onWriting = onWriting;
+        return this;
+    }
+
+    @Override
+    protected Void doInBackground() {
+        boolean isSucceded = true;
         try {
             System.out.println("Yak, replaceName()");
 
@@ -27,13 +42,14 @@ public class DocProcessor {
                         // Mengganti teks lama dengan teks baru
                         text = text.replace(PATTERN_NAME, names[i]);
                         i++;
+
                         run.setText(text, 0);
                         //System.out.println("Berhasil jadi " + names[i]);
                         System.out.println();
                     }
                 }
             }
-
+            /*System.out.println("cek names.length :" + names.length);
             for (int x = 0; x < names.length; x++){
                 for (XWPFTableRow row : document.getTables().get(x).getRows()) {
                     for (XWPFTableCell cell : row.getTableCells()) {
@@ -47,19 +63,20 @@ public class DocProcessor {
                                         //i++;
                                         r.setText(text, 0);
                                     }catch (Exception e){
+                                        System.out.println(i+"Error :"+ e.getMessage());
                                         e.printStackTrace();
                                     }
-
+                                    onProgressDocument.onProgress(x);
                                 }
                             }
                         }
                     }
                 }
-            }
+            }*/
 
             //int tblIdx = 0;
             // jika tak ketemu, mungkin perlu dicari di tabel
-            /*for (XWPFTable tbl : document.getTables()) {
+            for (XWPFTable tbl : document.getTables()) {
                 for (XWPFTableRow row : tbl.getRows()) {
                     for (XWPFTableCell cell : row.getTableCells()) {
                         for (XWPFParagraph p : cell.getParagraphs()) {
@@ -69,7 +86,9 @@ public class DocProcessor {
                                     try{
                                         text = text.replace(PATTERN_NAME, names[i]);
                                         System.out.println(i+" Berhasil jadi " + names[i]);
+                                        onWriting.onProgress(i, names[i] +" ..."+i);
                                         i++;
+
                                         r.setText(text, 0);
                                     }catch (Exception e){
                                         e.printStackTrace();
@@ -80,7 +99,7 @@ public class DocProcessor {
                         }
                     }
                 }
-            }*/
+            }
 
             // Menyimpan dokumen yang telah diubah
             FileOutputStream fos = new FileOutputStream(outputPath);
@@ -89,10 +108,12 @@ public class DocProcessor {
             fis.close();
             fos.close();
             document.close();
-
             System.out.println("Penggantian teks berhasil!");
         } catch (Exception e) {
             e.printStackTrace();
+            isSucceded = false;
         }
+        if (isSucceded) onWriting.onFinished();
+        return null;
     }
 }
