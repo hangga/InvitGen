@@ -2,13 +2,27 @@ package io.hangga;
 
 import org.apache.poi.xwpf.usermodel.*;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class DocProcessor {
+public class DocProcessor extends SwingWorker<Void, Void> {
     final String PATTERN_NAME = "--nama";
+    private String[] names;
+    private String templatePath;
+    private String outputPath;
+    private OnProgressDocument onProgressDocument;
 
-    void replaceName(String[] names, String templatePath, String outputPath, OnProgressDocument onProgressDocument) {
+    DocProcessor replaceName(String[] names, String templatePath, String outputPath, OnProgressDocument onProgressDocument) {
+        this.names = names;
+        this.templatePath = templatePath;
+        this.outputPath = outputPath;
+        this.onProgressDocument = onProgressDocument;
+        return this;
+    }
+
+    @Override
+    protected Void doInBackground() {
         try {
             System.out.println("Yak, replaceName()");
 
@@ -98,5 +112,6 @@ public class DocProcessor {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

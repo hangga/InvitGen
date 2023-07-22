@@ -18,7 +18,7 @@ public class Invigen {
                     public void onProgress(int progress, int max) {
                         listener.onProgress(progress, max);
                     }
-                });
+                }).execute();
                 listener.onSuccess(outputPath);
             }
 
@@ -39,7 +39,7 @@ public class Invigen {
                     public void onProgress(int progress, int max) {
                         listener.onProgress(progress, max);
                     }
-                });
+                }).execute();
                 listener.onSuccess(outputPath);
             }
 
