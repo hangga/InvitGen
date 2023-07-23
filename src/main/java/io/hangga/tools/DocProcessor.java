@@ -5,6 +5,7 @@ import org.apache.poi.xwpf.usermodel.*;
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.List;
 
 public class DocProcessor extends SwingWorker<Void, Void> {
     final String PATTERN_NAME = "--nama";
@@ -15,6 +16,18 @@ public class DocProcessor extends SwingWorker<Void, Void> {
 
     public DocProcessor replaceName(String[] names, String templatePath, String outputPath, OnWriting onWriting) {
         this.names = names;
+        this.templatePath = templatePath;
+        this.outputPath = outputPath;
+        this.onWriting = onWriting;
+        return this;
+    }
+
+    public DocProcessor replaceName(List<String> names, String templatePath, String outputPath, OnWriting onWriting) {
+        //this.names = names;
+        this.names = new String[names.size()];
+        for (int i = 0; i < names.size(); i++){
+            this.names[i] = names.get(i);
+        }
         this.templatePath = templatePath;
         this.outputPath = outputPath;
         this.onWriting = onWriting;

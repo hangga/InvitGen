@@ -5,7 +5,8 @@ import io.hangga.tools.*;
 public class Invigen {
 
     public static String userDir = System.getProperty("user.dir");
-    public static String template = userDir + "/template.docx";
+    public static String templatePath = userDir + "/template.docx";
+    public static String excelPath = userDir + "/namelist.xlsx";
 
     public static String tmp = userDir + "/output.docx";
 
