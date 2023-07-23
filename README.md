@@ -1,5 +1,5 @@
 # InviGen
-InviGen adalah tools untuk mengenerate surat undangan dengan jumlah banyak (sesuai daftar nama) secara semi otomatis.
+InviGen adalah tools untuk mengenerate surat undangan(berupa dokumen Word dengan format .docx) dengan jumlah banyak (sesuai daftar nama dalam Excel) secara semi otomatis.
 
 <img src="https://github.com/hangga/invigen/blob/main/invigen-gui-load-xls.png?raw=true" />
 
