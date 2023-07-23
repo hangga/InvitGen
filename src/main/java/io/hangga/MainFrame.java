@@ -252,5 +252,6 @@ public class MainFrame extends JFrame {
         btnChooseExcel.setEnabled(true);
         btnResetExcel.setEnabled(true);
         btnGenerate.setEnabled(true);
+        JOptionPane.showMessageDialog(this, "Buka berkas disini :" + getOutputFilePath(), "Berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
 }
