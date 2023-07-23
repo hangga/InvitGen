@@ -22,7 +22,8 @@ jar {
 
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
     manifest {
-        attributes "Main-Class": "io.hangga.MainFrame"
+        //attributes "Main-Class": "io.hangga.MainFrame"
+        attributes "Main-Class": "io.hangga.MainPage"
     }
 
     from {
