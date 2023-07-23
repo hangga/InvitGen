@@ -48,7 +48,7 @@ public class ExcelReader extends SwingWorker<Void, Void> {
                     for (Cell cell : row) {
                         System.out.print(cell.getStringCellValue() + "\n\t");
                         names.add(cell.getStringCellValue());
-                        stringBuffer.append(cell.getStringCellValue() + ", ");
+                        stringBuffer.append(cell.getStringCellValue()).append(", ");
                         excelListener.OnGetNameAt(cell.getStringCellValue());
                     }
                     System.out.println();
@@ -63,10 +63,8 @@ public class ExcelReader extends SwingWorker<Void, Void> {
                 // Iterate through each rows one by one
 
                 // Till there is an element condition holds true
-                for (Row row : sheet) {
+               /* for (Row row : sheet) {
 
-                    // For each row, iterate through all the
-                    // columns
                     Iterator<Cell> cellIterator
                             = row.cellIterator();
 
@@ -77,29 +75,19 @@ public class ExcelReader extends SwingWorker<Void, Void> {
                         names.add(cell.getStringCellValue());
                         stringBuffer.append(cell.getStringCellValue()).append(", ");
                         excelListener.OnGetNameAt(cell.getStringCellValue());
-
-                        // Checking the cell type and format
-                        // accordingly
-                        /*switch (cell.getCellType()) {
-
-                            // Case 1
-                            case Cell.CELL_TYPE_NUMERIC:
-                                System.out.print(
-                                        cell.getNumericCellValue()
-                                                + "t");
-                                break;
-
-                            // Case 2
-                            case Cell.CELL_TYPE_STRING:
-                                System.out.print(
-                                        cell.getStringCellValue()
-                                                + "t");
-                                break;
-                        }*/
                     }
+                }*/
 
-                    //System.out.println("");
+                for (Row row : sheet) {
+                    for (Cell cell : row) {
+                        System.out.print(cell.getStringCellValue() + "\n\t");
+                        names.add(cell.getStringCellValue());
+                        stringBuffer.append(cell.getStringCellValue()).append(", ");
+                        excelListener.OnGetNameAt(cell.getStringCellValue());
+                    }
+                    System.out.println();
                 }
+                if (names.size() > 0) excelListener.OnGetNames(names, String.valueOf(stringBuffer));
             }
 
             fis.close();
