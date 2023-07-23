@@ -3,14 +3,13 @@ plugins {
 }
 
 group = 'io.hangga'
-version = '1.0'
+version = '1.1'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-   // implementation 'org.apache.poi:poi:3.17'
     implementation 'org.apache.poi:poi:5.2.3'
     implementation 'org.apache.poi:poi-ooxml:5.2.3'
     implementation 'org.slf4j:slf4j-api:1.7.24'
@@ -22,8 +21,7 @@ jar {
 
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
     manifest {
-        //attributes "Main-Class": "io.hangga.MainFrame"
-        attributes "Main-Class": "io.hangga.MainPage"
+        attributes "Main-Class": "io.hangga.MainFrame"
     }
 
     from {
