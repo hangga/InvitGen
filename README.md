@@ -1,6 +1,8 @@
 # InviGen
 InviGen adalah tools untuk mengenerate surat undangan dengan jumlah banyak (sesuai daftar nama) secara semi otomatis.
 
+<img src="https://github.com/hangga/invigen/blob/main/invigen-gui-load-xls.png?raw=true" />
+
 ### Cerita dikit
 Jadi di tahun 1444H ini saya kembali diamanahi sebagai Sekertaris di Panitia Qurban Masjid Muhtadien.   
 Nah, saat mau bikin undangan untuk 100-an personil, saya kepikiran bagaimana caranya agar tidak perlu capek nulis tangan nama-namanya. Saya juga tidak mau capek copy-paste layout paragraf 100 kali Hahaha.   
