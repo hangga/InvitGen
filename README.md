@@ -22,15 +22,15 @@ Buatlah template dokumen undangan pake aplikasi Office(bisa MS Word atau Libreof
 #### 2. Pilih Template
 Pilih template yang telah anda buat tadi dengan cara klik tombol **Pilih Template**.
 
-#### 3. Ketik nama-nama pada Text Area
-Ketik nama-nama yang akan anda undang.
+#### 3. Load .xls file.
+Pilih file berisi daftar nama undangan dalam format .xls
 <br/>
-<img width="70%" src="https://github.com/hangga/invigen/blob/main/pilih-template.png?raw=true"/>
+<img width="70%" src="https://raw.githubusercontent.com/hangga/invigen/main/invigen-gui-pilih-file-xls.png.png"/>
 
 #### 4. Generate
 Klik tombol **Generate**. Jika proses berhasil, maka akan muncul dialog untuk menyimpan file hasil generate bernama **output-invigen.docx**.
 <br/><br/>
-<img width="70%" src="https://github.com/hangga/invigen/blob/main/save-output.png?raw=true"/>
+<img width="70%" src="https://github.com/hangga/invigen/blob/main/invigen-gui-save-output.png?raw=true"/>
 <br/>
 
 #### 5. Selesai
