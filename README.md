@@ -1,7 +1,7 @@
 # InvitGen
 InvitGen adalah tools untuk mengenerate surat undangan(berupa dokumen Word dengan format .docx) dengan jumlah banyak (sesuai daftar nama dalam Excel) secara semi otomatis.
 
-<img src="https://github.com/hangga/InvitGen/blob/main/InvitGen-gui-load-xls.png?raw=true" />
+<img src="https://github.com/hangga/invigen/blob/main/invigen-gui-load-xls.png?raw=true" />
 
 ### Cerita dikit
 Jadi di tahun 1444H ini saya kembali diamanahi sebagai Sekertaris di Panitia Qurban Masjid Muhtadien.   
@@ -19,7 +19,7 @@ Buatlah template dokumen undangan pake aplikasi Office(bisa MS Word atau Libreof
 1. Karena InvitGen hanya bisa mendeteksi tabel sehingga semua paragraf pada template **harus masuk dalam tabel**, meskipun hanya 1 column dan 1 row.
 2. Pada isian nama, ketiklah **--nama**  👈🏽(harus persis seperti ini, penting & perhatikan).
 - Contoh :<br/><br/>
-<img src="https://raw.githubusercontent.com/hangga/Invigen/main/template.png" width="100%"/>
+<img src="https://raw.githubusercontent.com/hangga/invigen/main/template.png" width="100%"/>
 
 #### 2. Pilih Template
 Pilih template yang telah anda buat tadi dengan cara klik tombol **Pilih Template**.
@@ -27,7 +27,7 @@ Pilih template yang telah anda buat tadi dengan cara klik tombol **Pilih Templat
 #### 3. Load .xls file.
 Pilih file berisi daftar nama undangan dalam format .xls
 <br/>
-<img width="70%" src="https://raw.githubusercontent.com/hangga/Invigen/main/InvitGen-gui-pilih-file-xls.png.png"/>
+<img width="70%" src="https://raw.githubusercontent.com/hangga/invigen/main/invigen-gui-pilih-file-xls.png.png"/>
 
 #### 4. Generate
 Klik tombol **Generate**. Jika proses berhasil, maka akan muncul dialog untuk menyimpan file hasil generate bernama **output-InvitGen.docx**.
