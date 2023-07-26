@@ -46,12 +46,12 @@ public class ExcelReader extends SwingWorker<Void, Void> {
                 //StringBuffer stringBuffer = new StringBuffer();
                 for (Row row : sheet) {
                     for (Cell cell : row) {
-                        System.out.print(cell.getStringCellValue() + "\n\t");
-                        names.add(cell.getStringCellValue());
+                        //System.out.print(cell.getStringCellValue() + "\n\t");
+                        names.add(cell.getStringCellValue().replace("/","-"));
                         stringBuffer.append(cell.getStringCellValue()).append(", ");
                         excelListener.OnGetNameAt(cell.getStringCellValue());
                     }
-                    System.out.println();
+                    //System.out.println();
                 }
                 if (names.size() > 0) excelListener.OnGetNames(names, String.valueOf(stringBuffer));
             } else {
@@ -80,12 +80,12 @@ public class ExcelReader extends SwingWorker<Void, Void> {
 
                 for (Row row : sheet) {
                     for (Cell cell : row) {
-                        System.out.print(cell.getStringCellValue() + "\n\t");
-                        names.add(cell.getStringCellValue());
+                        //System.out.print(cell.getStringCellValue() + "\n\t");
+                        names.add(cell.getStringCellValue().replace("/","-"));
                         stringBuffer.append(cell.getStringCellValue()).append(", ");
                         excelListener.OnGetNameAt(cell.getStringCellValue());
                     }
-                    System.out.println();
+                    //System.out.println();
                 }
                 if (names.size() > 0) excelListener.OnGetNames(names, String.valueOf(stringBuffer));
             }

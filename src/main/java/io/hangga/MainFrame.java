@@ -7,21 +7,34 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainFrame extends JFrame {
 
-    private DefaultTableModel tableModel;
     private final List<String> arrNames;
     private final JFileChooser outputChooser;
     private final JProgressBar progressBar;
+    private DefaultTableModel tableModel;
     private JButton btnResetExcel;
     private JButton btnChooseExcel;
     private JButton btnChooseTemplate;
     private JButton btnGenerate;
     private String templatePath;
+    private JRadioButton rbSingle;
+    private JRadioButton rbMultiple;
+
+    private boolean isMultiple = true;
+    private final ActionListener rbListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            outputChooser.setSelectedFile(null);
+            isMultiple = rbMultiple.isSelected();
+        }
+    };
 
     public MainFrame() {
         arrNames = new ArrayList<>();
@@ -43,7 +56,7 @@ public class MainFrame extends JFrame {
     private void initUI() {
         setTitle("InviGen");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(430, 400);
+        setSize(600, 400);
         setLocationRelativeTo(null);
 
         JPanel midlePanel = new JPanel();
@@ -77,15 +90,30 @@ public class MainFrame extends JFrame {
         btnResetExcel = new JButton("Reset");
         btnResetExcel.setEnabled(false);
 
-        JPanel panelLeftBottom = new JPanel();
-        panelLeftBottom.setLayout(new FlowLayout());
-        panelLeftBottom.add(progressBar);
-        panelLeftBottom.add(btnResetExcel);
-        panelLeftBottom.add(btnChooseExcel);
-        panelLeftBottom.add(btnChooseTemplate);
-        panelLeftBottom.add(btnGenerate);
+        JPanel pnlBottom = new JPanel();
+        pnlBottom.setLayout(new FlowLayout());
+        pnlBottom.add(progressBar);
+        pnlBottom.add(btnResetExcel);
+        pnlBottom.add(btnChooseExcel);
+        pnlBottom.add(btnChooseTemplate);
 
-        leftPanel.add(panelLeftBottom);
+        rbSingle = new JRadioButton("1 File");
+        rbMultiple = new JRadioButton("Multiple File");
+        rbMultiple.setSelected(true);
+
+        JPanel pnlGenerate = new JPanel();
+        pnlGenerate.setLayout(new FlowLayout());
+
+        ButtonGroup rbGroup = new ButtonGroup();
+        rbGroup.add(rbMultiple);
+        rbGroup.add(rbSingle);
+
+        pnlGenerate.add(rbMultiple);
+        pnlGenerate.add(rbSingle);
+        pnlGenerate.add(btnGenerate);
+        pnlBottom.add(pnlGenerate);
+
+        leftPanel.add(pnlBottom);
         midlePanel.add(leftPanel);
 
         add(midlePanel);
@@ -93,6 +121,8 @@ public class MainFrame extends JFrame {
     }
 
     private void initAction() {
+        rbMultiple.addActionListener(rbListener);
+        rbSingle.addActionListener(rbListener);
         btnResetExcel.addActionListener(e -> resetExcelData());
         btnChooseExcel.addActionListener(e -> chooseExcelFile());
         btnChooseTemplate.addActionListener(e -> chooseTemplateFile());
@@ -147,7 +177,7 @@ public class MainFrame extends JFrame {
     }
 
     private void generateDocument() {
-        setButtonStatus();
+
         if (arrNames.size() == 0) {
             showInfo();
             return;
@@ -156,30 +186,15 @@ public class MainFrame extends JFrame {
         progressBar.setMaximum(arrNames.size());
         setupOutputChooser();
 
+
         if (outputChooser.getSelectedFile() != null) {
+            setButtonStatus();
             progressBar.setVisible(true);
-            new Generator().setPath(templatePath, outputChooser.getSelectedFile().getAbsolutePath(), arrNames.size(), new OnCopying() {
-                @Override
-                public void OnCopyProgress(int progress, String status) {
-                    updateProgressBar("Tunggu...", progress);
-                }
 
-                @Override
-                public void OnCopyFinish(String copyOutput) {
-                    processDocumentCopy(copyOutput);
-                }
-
-                @Override
-                public void OnError(String errMsg) {
-                    //new Dialog(this., errMsg).setVisible(true);
-                }
-            }).execute();
-        } else {
-            outputChooser.setSelectedFile(new File("output-invigen.docx"));
-
-            if (outputChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-                progressBar.setVisible(true);
-                new Generator().setPath(templatePath, outputChooser.getSelectedFile().getAbsolutePath(), arrNames.size(), new OnCopying() {
+            if (isMultiple) {
+                processDocumentCopy(templatePath);
+            } else {
+                new Generator().setPath(templatePath, getOutputFilePath(), arrNames.size(), new GeneratorListener() {
                     @Override
                     public void OnCopyProgress(int progress, String status) {
                         updateProgressBar("Tunggu...", progress);
@@ -195,21 +210,50 @@ public class MainFrame extends JFrame {
                     }
                 }).execute();
             }
+        } else {
+            outputChooser.setSelectedFile(new File("output-invigen.docx"));
+
+            if (outputChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                setButtonStatus();
+                progressBar.setVisible(true);
+
+                if (isMultiple) {
+                    processDocumentCopy(templatePath);
+                } else {
+                    new Generator().setPath(templatePath, getOutputFilePath(), arrNames.size(), new GeneratorListener() {
+                        @Override
+                        public void OnCopyProgress(int progress, String status) {
+                            updateProgressBar("Menggandakan...", progress);
+                        }
+
+                        @Override
+                        public void OnCopyFinish(String copyOutput) {
+                            processDocumentCopy(copyOutput);
+                        }
+
+                        @Override
+                        public void OnError(String errMsg) {
+                        }
+                    }).execute();
+                }
+
+            }
         }
     }
 
-    private void processDocumentCopy(String copyOutput) {
-        new DocProcessor().replaceName(arrNames, copyOutput, getOutputFilePath(), new OnWriting() {
+    private void processDocumentCopy(String pathSrc) {
+
+        new DocProcessor().replaceName(arrNames, pathSrc, getOutputFilePath(), new DocListener() {
             @Override
             public void onProgress(int progress, String status) {
-                updateProgressBar("Menulis Nama...", progress);
+                updateProgressBar("Menulis...", progress);
             }
 
             @Override
             public void onFinished() {
                 onFinishedUI();
             }
-        }).execute();
+        }).setMultipleFile(isMultiple).execute();
     }
 
     private void setButtonStatus() {
@@ -225,6 +269,11 @@ public class MainFrame extends JFrame {
     }
 
     private void setupOutputChooser() {
+        if (isMultiple) {
+            outputChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        } else {
+            outputChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        }
         outputChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .docx", "docx"));
         outputChooser.addChoosableFileFilter(new FileNameExtensionFilter("Microsoft Word Documents .doc", "doc"));
         outputChooser.addChoosableFileFilter(new FileNameExtensionFilter("LibreOffice Documents .odt", "odt"));

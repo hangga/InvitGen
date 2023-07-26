@@ -1,6 +1,6 @@
 package io.hangga.tools;
 
-public interface OnCopying {
+public interface GeneratorListener {
 
     void OnCopyProgress(int progress, String status);
     void OnCopyFinish(String copyOutput);
