@@ -13,7 +13,7 @@ public class Invigen {
     public void generate(String names, String template, String outputPath, InvigenListener listener) {
 
         String[] arrNames = names.split(",");
-        new Generator().setPath(template, outputPath, arrNames.length, new OnCopying() {
+        new Generator().setPath(template, outputPath, arrNames.length, new GeneratorListener() {
             @Override
             public void OnCopyProgress(int progress, String status) {
 
@@ -21,7 +21,7 @@ public class Invigen {
 
             @Override
             public void OnCopyFinish(String copyOutput) {
-                new DocProcessor().replaceName(arrNames, copyOutput, outputPath, new OnWriting() {
+                new DocProcessor().replaceName(arrNames, copyOutput, outputPath, new DocListener() {
                     @Override
                     public void onProgress(int progress, String status) {
                         listener.onProgress(progress, status);
@@ -44,7 +44,7 @@ public class Invigen {
     }
 
     public void generate(String[] names, String template, String outputPath, InvigenListener listener) {
-        new Generator().setPath(template, outputPath, names.length, new OnCopying() {
+        new Generator().setPath(template, outputPath, names.length, new GeneratorListener() {
             @Override
             public void OnCopyProgress(int progress, String status) {
 
@@ -52,7 +52,7 @@ public class Invigen {
 
             @Override
             public void OnCopyFinish(String copyOutput) {
-                new DocProcessor().replaceName(names, copyOutput, outputPath, new OnWriting() {
+                new DocProcessor().replaceName(names, copyOutput, outputPath, new DocListener() {
                     @Override
                     public void onProgress(int progress, String status) {
                         listener.onProgress(progress, status);

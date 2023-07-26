@@ -18,12 +18,12 @@ public class Generator extends SwingWorker<Void, Void> {
     private String templatePath;
     private String outputPath;
     private int count;
-    OnCopying onCopying;
-    public Generator setPath(String templatePath, String outputPath, int count, OnCopying onCopying) {
+    GeneratorListener generatorListener;
+    public Generator setPath(String templatePath, String outputPath, int count, GeneratorListener generatorListener) {
         this.templatePath = templatePath;
         this.outputPath = outputPath;
         this.count = count;
-        this.onCopying = onCopying;
+        this.generatorListener = generatorListener;
         return this;
     }
 
@@ -50,7 +50,7 @@ public class Generator extends SwingWorker<Void, Void> {
     }
 
     @Override
-    protected Void doInBackground() throws Exception {
+    protected Void doInBackground() {
         boolean isSukses = false;
         FileInputStream fis = null;
         try {
@@ -70,7 +70,7 @@ public class Generator extends SwingWorker<Void, Void> {
                 document.createParagraph();
                 document.createParagraph();
                 document.createParagraph();
-                onCopying.OnCopyProgress(i, "Copying...");
+                generatorListener.OnCopyProgress(i, "Copying...");
             }
 
             FileOutputStream fos = new FileOutputStream(outputPath);
@@ -81,10 +81,10 @@ public class Generator extends SwingWorker<Void, Void> {
             document.close();
             isSukses = true;
         } catch (IOException e) {
-            onCopying.OnError(e.getMessage());
+            generatorListener.OnError(e.getMessage());
             throw new RuntimeException(e);
         }
-        if (isSukses) onCopying.OnCopyFinish(outputPath);
+        generatorListener.OnCopyFinish(outputPath);
         return null;
     }
 }
