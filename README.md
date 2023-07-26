@@ -32,7 +32,7 @@ Pilih file berisi daftar nama undangan dalam format .xls
 #### 4. Generate
 Klik tombol **Generate**. Jika proses berhasil, maka akan muncul dialog untuk menyimpan file hasil generate bernama **output-InvitGen.docx**.
 <br/><br/>
-<img width="70%" src="https://github.com/hangga/InvitGen/blob/main/InvitGen-gui-save-output.png?raw=true"/>
+<img width="70%" src="https://github.com/hangga/invigen/blob/main/invigen-gui-save-output.png?raw=true"/>
 <br/>
 
 #### 5. Selesai
